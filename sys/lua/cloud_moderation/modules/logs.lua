@@ -83,6 +83,7 @@ function logs.retrieve_logs()
         local line_index = i
         l_menu.logs[line_index] = line
         local time, ip, steam, usgn, id, team, name, log = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%]: ([%w%p ]+)")
+
         local action_menu = {
             title = name.." - "..ip,
             items = {
@@ -112,8 +113,9 @@ function logs.retrieve_logs()
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
         }
+
         local ban_menu = {
-            title = l_menu.items.name.." - "..l_menu.items.ip,
+            title = name.." - "..ip,
             items = {
                 {"Ban Name","",function(id) parse("banname " ..name) end},
                 {"Ban IP","",function(id) parse("banip " .. ip) end},
@@ -122,6 +124,7 @@ function logs.retrieve_logs()
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
         }
+
         local mute_menu = {
             title = name.." - "..ip,
             items = {
@@ -141,6 +144,7 @@ function logs.retrieve_logs()
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
         }
+
         local info_menu = {
             title = "Info - Click on an info button to print in chat.",
             items = {
@@ -153,6 +157,7 @@ function logs.retrieve_logs()
             big = true
             }
         }
+
         table.insert(l_menu.items, {time.." - "..name, log, function(id) unimenu.open(id, action_menu) end})
         i = i + 1
     end
