@@ -2,8 +2,6 @@ print(print_mod..'Config = LOADED')
 
 print(print_mod..'Proceed into loading the hooks = STARTING...')
 
-local unimenu = require(directory.."unimenu")
-
 if Player == nil then Player = {} end -- for player vars
 
 function mod_join(id)

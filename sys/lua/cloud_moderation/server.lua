@@ -47,12 +47,14 @@ function colors(name)
 end
 
 -- Core
-cloud.core = {"config","util","functions","commands","moderation","fix","unimenu"}
+cloud.core = {"config","util","functions","commands","moderation","fix"}
 
 for k, v in pairs(cloud.core) do
 	dofile(directory..v..".lua")
 	print(print_mod..v..".lua CORE LOADED!")
 end
+
+unimenu = dofile(directory.."unimenu.lua")
 
 -- Modules
 for k, v in pairs(cloud.settings.modules) do
