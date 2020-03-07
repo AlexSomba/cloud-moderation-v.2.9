@@ -1,13 +1,12 @@
 reports = {}
-local unimenu = require(directory.."unimenu")
+
 function reports.retrieve_reports()
     local r_menu = {
         title = "Reports Issued by Players",
         items = {},
-        fixedItems = {
-	        [7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}
-	    },
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}},
         reports = {},
+        big = true,
 	}
 
     local file = io.open(directory.."data/reports.txt", "r")
@@ -43,12 +42,9 @@ function reports.retrieve_reports()
                     local fd = io.open(directory.."data/reports.txt", "w")
                     fd:write()
                     fd:close()
-                end
-                },
-                fixedItems = {
-        	        [7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}
-        	    }
+                end}
             },
+            fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
         }
         table.insert(r_menu.items, {time.." - "..name, reason, function(id) unimenu.open(id, action_menu) end})
         i = i + 1
