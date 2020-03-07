@@ -133,7 +133,7 @@ function logs.retrieve_logs()
         local action_menu = {
             title = name.." - "..ip,
             items = {
-                {"Issue a Ban",">",function(id) unimenu.open(id, ban_menu) end},
+                {"Issue a Ban",">",function(id) unimenu.open(id, test_menu) end},
                 {"Mute Player",">",function(id) unimenu.open(id, mute_menu) end},
                 {"","",function(id) end},
                 {"Show player info","",function(id) unimenu.open(id, info_menu) msg2(id,cloud.tags.server..time.." - "..name.." - "..ip.." - USGN: "..usgn.." - STEAM: "..steam.." - ID: "..id.." - Team: "..team.." - Log: "..log) end},
@@ -156,6 +156,17 @@ function logs.retrieve_logs()
                     fd:write()
                     fd:close()
                 end}
+            },
+            fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
+        }
+
+        test_menu = {
+            title = name.." - "..ip,
+            items = {
+                {"Ban Name","",function(id) parse("banname " ..name) end},
+                {"Ban IP","",function(id) parse("banip " .. ip) end},
+                {"Ban U.S.G.N.","",function(id) parse("banusgn " ..usgn) end},
+                {"Ban STEAM","",function(id) parse("bansteam " ..steam) end}
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
         }
