@@ -4,9 +4,11 @@ local unban_types = { IP = true, USGN = true, Steam = true, Name = true }
 
 function unban.retrieve_bans()
 	local u_menu = {
-		title = "Unban User",
-		modifiers = "s",
-		items = {},
+	    title = "Unban User",
+	    items = {},
+	    fixedItems = {
+	        [7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}
+	    },
 	}
 	parse("bans")
 
@@ -57,10 +59,9 @@ function unban.retrieve_bans()
 	            {"Lift Ban", "", function(id) parse("unban " ..ban_mask) msg2(id,cloud.tags.server.."Ban - "..ban_mask.." has been lifted.") end}
 	        },
 		}
-		table.insert(u_menu.items, {ban_mask, ban_type, function(id) unimenu(id, true, action_menu, 1) end})
+		table.insert(u_menu.items, {ban_mask, ban_type, function(id) unimenu.open(id, action_menu) end})
 	end
 
-	if ban_type == nil then return end
 	return u_menu
 end
 

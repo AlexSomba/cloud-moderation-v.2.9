@@ -13,7 +13,7 @@ function comments.retrieve_comments()
     for line in file:lines() do
         local line_index = i
         c_menu.comments[line_index] = line
-        local time, ip, steam, usgn, id, team, name, comment = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: ([%w%p ]+)%]: ([%w%p ]+)")
+        local time, ip, steam, usgn, id, team, name, comment = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%]: ([%w%p ]+)")
         local action_menu = {
             title = name.." - "..usgn.." - "..ip,
             modifiers = "s",

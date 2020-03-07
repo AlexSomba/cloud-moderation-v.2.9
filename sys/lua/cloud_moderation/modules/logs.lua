@@ -13,8 +13,7 @@ function logs.retrieve_logs()
     for line in file:lines() do
         local line_index = i
         l_menu.logs[line_index] = line
-        local time, ip, steam, usgn, id, team, name, log = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: ([%w%p ]+)%]: ([%w%p ]+)")
-        print(time.." "..ip.." "..steam.." "..usgn.." "..id.." "..team.." "..name.." "..log)
+        local time, ip, steam, usgn, id, team, name, log = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%]: ([%w%p ]+)")
         logs.action_menu = {
             [1] = {
                 title = name.." - "..ip,
