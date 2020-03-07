@@ -24,7 +24,7 @@ cloud.colors = {
 }
 
 cloud.settings = {
-    version = "Beta - Patch v2.9",
+    version = "Beta - Patch v3.0",
     credits = {
         "== Credits ==",
         "Alex, (U.S.G.N)#57648 - Moderation script.",
@@ -46,7 +46,7 @@ cloud.settings = {
     -- Commands to load --
     -- You can enable other commands here
     -- ex: {"core","freeroam","mixmatch"}
-    enabled_command_modules = {"core","freeroam"},
+    enabled_command_modules = {"core"},
 
     -- Modules --
     modules = {
@@ -59,7 +59,7 @@ cloud.settings = {
         logs = true,
 
         -- Extended scripting modules --
-        freeroam = true,
+        freeroam = false,
         mixmatch = false
     },
 

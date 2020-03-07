@@ -2,6 +2,8 @@ print(print_mod..'Config = LOADED')
 
 print(print_mod..'Proceed into loading the hooks = STARTING...')
 
+local unimenu = require(directory.."unimenu")
+
 if Player == nil then Player = {} end -- for player vars
 
 function mod_join(id)
@@ -107,11 +109,21 @@ function mod_clientdata(id, mode, data1, data2)
 end
 addhook("clientdata","mod_clientdata",10)
 
+local main_menu = {
+	title = function(page) return "[" .. page .. "] Main Menu" end,
+	items = {
+		{"Unban", "", function(id) unban.retrieve_bans() end},
+		{"Reports", "", function(id) unimenu.open(id, reports.retrieve_reports()) end},
+		{"Comments", "", function(id) comments.retrieve_comments() end},
+		{"Logs", "", function(id) logs.retrieve_logs() end}
+	},
+}
+
 function mod_serveraction(id, action)
 	if action == 1 then
 		if cloud.settings.modules.unban then
 			if Player[id].var_level >= 5 then
-				unimenu(id,true,main_menu[1],1)
+				unimenu.open(id, main_menu)
 			else
 				msg2(id,cloud.error.privilege)
 			end
