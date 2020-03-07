@@ -1,5 +1,5 @@
 reports = {}
-
+local unimenu = require(directory.."unimenu")
 function reports.retrieve_reports()
     local r_menu = {
         title = "Reports Issued by Players",
