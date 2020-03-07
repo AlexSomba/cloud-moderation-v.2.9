@@ -65,6 +65,52 @@ function logs.mutePlayer(id,name,usgn,steam,duration,toggle)
     end
 end
 
+function menuAction(id,name,ip)
+    local ban_menu = {
+        title = name.." - "..ip,
+        items = {
+            {"Ban Name","",function(id) parse("banname " ..name) end},
+            {"Ban IP","",function(id) parse("banip " .. ip) end},
+            {"Ban U.S.G.N.","",function(id) parse("banusgn " ..usgn) end},
+            {"Ban STEAM","",function(id) parse("bansteam " ..steam) end}
+        },
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
+    }
+
+    local mute_menu = {
+        title = name.." - "..ip,
+        items = {
+            {"5 Minutes","",function(id)
+                local toggle = true
+                local duration = 5
+                logs.mutePlayer(id,name,usgn,steam,duration,toggle)
+            end},
+            {"30 Minutes","",function(id) end},
+            {"1 Hour","",function(id) end},
+            {"24 Hours","",function(id) msg2(id,cloud.tags.server.."This feature is in development.") end},
+            {"Unmute","",function(id)
+                local toggle = 0
+                local duration = 0
+                logs.mutePlayer(id,name,usgn,steam,duration,toggle)
+            end}
+        },
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
+    }
+
+    local info_menu = {
+        title = "Info - Click on an info button to print in chat.",
+        items = {
+            {"Name",name,function(id) unimenu.historyBack(id) end},
+            {"IP",ip,function(id) unimenu.historyBack(id) end},
+            {"STEAM",steam,function(id) unimenu.historyBack(id) end},
+            {"USGN",usgn,function(id) unimenu.historyBack(id) end}
+        },
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end},
+        big = true
+        }
+    }
+end
+
 function logs.retrieve_logs()
     local l_menu = {
         title = "Logs",
@@ -112,50 +158,6 @@ function logs.retrieve_logs()
                 end}
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
-        }
-
-        local ban_menu = {
-            title = name.." - "..ip,
-            items = {
-                {"Ban Name","",function(id) parse("banname " ..name) end},
-                {"Ban IP","",function(id) parse("banip " .. ip) end},
-                {"Ban U.S.G.N.","",function(id) parse("banusgn " ..usgn) end},
-                {"Ban STEAM","",function(id) parse("bansteam " ..steam) end}
-            },
-            fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
-        }
-
-        local mute_menu = {
-            title = name.." - "..ip,
-            items = {
-                {"5 Minutes","",function(id)
-                    local toggle = true
-                    local duration = 5
-                    logs.mutePlayer(id,name,usgn,steam,duration,toggle)
-                end},
-                {"30 Minutes","",function(id) end},
-                {"1 Hour","",function(id) end},
-                {"24 Hours","",function(id) msg2(id,cloud.tags.server.."This feature is in development.") end},
-                {"Unmute","",function(id)
-                    local toggle = 0
-                    local duration = 0
-                    logs.mutePlayer(id,name,usgn,steam,duration,toggle)
-                end}
-            },
-            fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
-        }
-
-        local info_menu = {
-            title = "Info - Click on an info button to print in chat.",
-            items = {
-                {"Name",name,function(id) unimenu.historyBack(id) end},
-                {"IP",ip,function(id) unimenu.historyBack(id) end},
-                {"STEAM",steam,function(id) unimenu.historyBack(id) end},
-                {"USGN",usgn,function(id) unimenu.historyBack(id) end}
-            },
-            fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end},
-            big = true
-            }
         }
 
         table.insert(l_menu.items, {time.." - "..name, log, function(id) unimenu.open(id, action_menu) end})
