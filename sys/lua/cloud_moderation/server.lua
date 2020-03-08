@@ -47,7 +47,7 @@ function colors(name)
 end
 
 -- Core
-cloud.core = {"config","util","functions","commands","moderation","fix"}
+cloud.core = {"config","util","functions","save","load","commands","moderation","fix"}
 
 for k, v in pairs(cloud.core) do
 	dofile(directory..v..".lua")

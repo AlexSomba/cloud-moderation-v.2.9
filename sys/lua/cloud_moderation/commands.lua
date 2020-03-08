@@ -74,7 +74,7 @@ cloud.commands = {
                 if usgnid ~= nil then
                     if password ~= nil then
                         login = usgnid
-                        readData(id, login, password)
+                        load.loginUSGN(id, login, password)
                     else
                         msg2(id,cloud.tags.server.."You have not provided a password!")
                     end
@@ -242,7 +242,7 @@ cloud.commands = {
             if playerExists(id, pl) then
     			if level ~= nil then
                     if Player[id].var_level >= Player[pl].var_level then
-    					assignRankData(pl, level)
+    					load.assignRankData(pl, level)
     					msg2(pl,cloud.tags.server.."<"..player(id,"name").."> set your rank to "..level)
     					msg2(id,cloud.tags.server.."<"..player(pl,"name").."> is now "..level)
                     else

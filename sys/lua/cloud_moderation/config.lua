@@ -46,7 +46,7 @@ cloud.settings = {
     -- Commands to load --
     -- You can enable other commands here
     -- ex: {"core","freeroam","mixmatch"}
-    enabled_command_modules = {"core"},
+    enabled_command_modules = {"core","freeroam"},
 
     -- Modules --
     modules = {
@@ -59,7 +59,7 @@ cloud.settings = {
         logs = true,
 
         -- Extended scripting modules --
-        freeroam = false,
+        freeroam = true,
         mixmatch = false
     },
 

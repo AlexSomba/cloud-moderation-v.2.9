@@ -9,8 +9,10 @@ function mod_join(id)
 
 --	search for a player save file and assign vars
 --	no saved data found? then assign default vars
-	readData(id)
+	load.loadData(id)
 
+--	after at least 3 seconds the save file is loaded, assign some other tasks
+	timer(3000,"load.onLoad",id)
 --  these are just to compare messages for [Cloud Buster] functionability
 --	no need to store them in player save files
 	Player[id].var_msgs = 0
@@ -22,7 +24,7 @@ function mod_leave(id)
 	-- create a save file for logged in users
 	if Player[id] then
 		if Player[id].VARSLOADED == true then
-			writeData(id)
+			save.writeData(id)
 		end
 	end
 end
@@ -110,24 +112,24 @@ addhook("clientdata","mod_clientdata",10)
 local main_menu = {
 	title = function(page) return "[" .. page .. "] Main Menu" end,
 	items = {
-		{"Unban", "", function(id) unban.retrieve_bans() end},
+		{"Unban", "", function(id) unimenu.open(id, unban.retrieve_bans()) end},
 		{"Reports", "", function(id) unimenu.open(id, reports.retrieve_reports()) end},
-		{"Comments", "", function(id) comments.retrieve_comments() end},
-		{"Logs", "", function(id) logs.retrieve_logs() end}
+		{"Comments", "", function(id) unimenu.open(id, comments.retrieve_comments()) end},
+		{"Logs", "", function(id) unimenu.open(id, logs.retrieve_logs()) end}
 	},
 }
 
 function mod_serveraction(id, action)
 	if action == 1 then
-		if cloud.settings.modules.unban then
+--		TODO// if cloud.settings.modules.unban then
 			if Player[id].var_level >= 5 then
 				unimenu.open(id, main_menu)
 			else
 				msg2(id,cloud.error.privilege)
 			end
-		else
-			msg2(id,cloud.tags.server.."This module is disabled.")
-		end
+--		else
+--			msg2(id,cloud.tags.server.."This module is disabled.")
+--		end
 	elseif action == 3 then
 		if Player[id].var_level >= 5 then
 			if player(id,"health") ~= 0 then
