@@ -46,7 +46,7 @@ cloud.settings = {
     -- Commands to load --
     -- You can enable other commands here
     -- ex: {"core","freeroam","mixmatch"}
-    enabled_command_modules = {"core","freeroam"},
+    enabled_command_modules = {"core"},
 
     -- Modules --
     modules = {
@@ -59,7 +59,7 @@ cloud.settings = {
         logs = true,
 
         -- Extended scripting modules --
-        freeroam = true,
+        freeroam = false,
         mixmatch = false
     },
 
@@ -136,7 +136,7 @@ cloud.settings = {
             name = "user",
             tag = "[User]",
             commands = {
-                "pm","comment","report","help","credits","register","login","payfee"
+                "pm","comment","report","help","credits","register","login"
             },
             tag_color = colors("lavender_blue")
         },
@@ -146,7 +146,7 @@ cloud.settings = {
             name = "premium",
             tag = "[Premium]",
             commands = {
-                "pm","comment","report","help","credits","register","login","payfee"
+                "pm","comment","report","help","credits","register","login"
             },
             tag_color = colors("safety_orange")
         },
@@ -156,7 +156,7 @@ cloud.settings = {
             name = "member",
             tag = "[Member]",
             commands = {
-                "pm","comment","report","help","credits","register","login","payfee"
+                "pm","comment","report","help","credits","register","login"
             },
             tag_color = colors("neon_blue")
         },
@@ -167,7 +167,7 @@ cloud.settings = {
             tag = "[Supporter]",
             commands = {
                 "pm","comment","report","help","kick","info","credits","register",
-                "login","payfee"
+                "login"
             },
             tag_color = colors("magenta")
         },
@@ -179,7 +179,7 @@ cloud.settings = {
             commands = {
                 "pm","comment","report","help","kick","ban","info","tag","bring",
                 "goto","bigears","mute","unmute","slap","kill","strip","speed",
-                "equip","restart","teleport","credits","register","login","payfee"
+                "equip","restart","teleport","credits","register","login"
             },
             tag_color = colors("green")
         },
@@ -192,7 +192,7 @@ cloud.settings = {
                 "pm","comment","report","help","kick","ban","info",
                 "tag","god","bring","goto","bigears","mute","unmute","slap",
                 "kill","strip","speed","equip","map","restart","teleport",
-                "credits","register","login","payfee","prison","unprison"
+                "credits","register","login"
             },
             tag_color = colors("dark_cyan")
         },
@@ -205,8 +205,7 @@ cloud.settings = {
                 "pm","comment","report","help","kick","ban","make","info",
                 "tag","god","bring","goto","bigears","mute","unmute","slap","kill",
                 "strip","speed","equip","map","restart","rcon","reloadlua","teleport",
-                "buster","periodic","credits","lastlogged","register","login","grab",
-                "payfee","prison","unprison"
+                "buster","periodic","credits","lastlogged","register","login","grab"
             },
             tag_color = colors("scarlet")
         }
@@ -223,7 +222,6 @@ cloud.settings = {
         "var_mute_toggle","var_mute_duration",
         "var_usgn_password",
         "var_grab_toggle","var_grab_targetID",
-        "var_prison","var_prisonfee","var_prisoncrime","var_prison_duration",
         "var_commands"
     }
 }

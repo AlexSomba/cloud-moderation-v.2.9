@@ -113,6 +113,10 @@ function load.loginUSGN(id, login, password)
 end
 
 function load.onLoad(id)
+    local id = tonumber(id)
+    if not player(id,"exists") then
+        return -- player does not exist, exit function
+    end
     -- assign some other statements after everything from the save file is loaded
     if Player[id].VARSLOADED then
         -- Automatically ban players in the blacklist
@@ -133,7 +137,7 @@ function load.onLoad(id)
             end
         end
         -- Display welcome message after 2 seconds have passed
-        local welcome = function(id)
+        welcome = function(id)
             if player(id,"exists") then
                 msg2(id,colors("cotton_candy").."== Cloud Moderation Version - "..cloud.settings.version.." ==")
                 msg2(id,colors("cotton_candy").."== "..game("sv_name").." ==")
