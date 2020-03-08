@@ -6,7 +6,6 @@ if Player == nil then Player = {} end -- for player vars
 
 function mod_join(id)
 	Player[id] = {}
-
 --	search for a player save file and assign vars
 --	no saved data found? then assign default vars
 	load.loadData(id)
@@ -25,6 +24,7 @@ function mod_leave(id)
 	if Player[id] then
 		if Player[id].VARSLOADED == true then
 			save.writeData(id)
+			Player[id].VARSLOADED = nil
 		end
 	end
 end

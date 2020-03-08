@@ -29,9 +29,6 @@ function save.writeData(id)
             file:flush()
             -- close the file
             file:close()
-            file = nil
-            -- user with the specific ID number varsloaded returns nil
-            Player[id].VARSLOADED = nil
         else
             msg2(id,cloud.tags.server.."No stats found!")
         end

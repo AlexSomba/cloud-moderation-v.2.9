@@ -71,15 +71,19 @@ cloud.commands = {
             local usgnid = tbl[2]
             local password = tbl[3]
             if player(id,"usgn") == 0 then
-                if usgnid ~= nil then
-                    if password ~= nil then
-                        login = usgnid
-                        load.loginUSGN(id, login, password)
+                if Player[id].var_login == nil then
+                    if usgnid ~= nil then
+                        if password ~= nil then
+                            login = usgnid
+                            load.loginUSGN(id, login, password)
+                        else
+                            msg2(id,cloud.tags.server.."You have not provided a password!")
+                        end
                     else
-                        msg2(id,cloud.tags.server.."You have not provided a password!")
+            			msg2(id,cloud.tags.server.."You have not provided a U.S.G.N. ID!")
                     end
                 else
-        			msg2(id,cloud.tags.server.."You have not provided a U.S.G.N. ID!")
+                    msg2(id,cloud.tags.server.."You are allready logged into USGN#"..Player[id].var_login)
                 end
             else
     			msg2(id,cloud.tags.server.."You are allready logged into USGN#"..player(id,"usgn"))

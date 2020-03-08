@@ -57,66 +57,58 @@ function load.readData(id)
     -- read save file contents (deserialize) and parse its contents into a table
     -- and close the file
     local saved_data
-    local read_data = function(id)
-        if fileUSGN then
-            saved_data = table.deserialize(fileUSGN:read("*a"))
-            fileUSGN:close()
-            fileUSGN = nil
-        elseif fileSTEAM then
-            saved_data = table.deserialize(fileSTEAM:read("*a"))
-            fileSTEAM:close()
-            fileSTEAM = nil
-        end
+    if fileUSGN then
+        msg2(id,cloud.tags.server.."USGN-ID found.")
+        saved_data = table.deserialize(fileUSGN:read("*a"))
+        fileUSGN:close()
+    elseif fileSTEAM then
+        msg2(id,cloud.tags.server.."Steam-ID found.")
+        saved_data = table.deserialize(fileSTEAM:read("*a"))
+        fileSTEAM:close()
     end
+    return saved_data
 end
 
 function load.loadData(id)
     -- read data
-    load.readData(id)
+    local saved_data = load.readData(id)
 
     -- is the player vars loaded? proceed if not
     if Player[id].VARSLOADED == nil then
         -- check if save file exists and assign saved data vars (steam/usgn found)
-        if fileUSGN then
-            msg2(id,cloud.tags.server.."USGN-ID found.")
-            read_data(id)
+        if saved_data then
             load.assignSavedData(id, saved_data)
-            Player[id].VARSLOADED = true
         else
-            if fileSTEAM then
-                msg2(id,cloud.tags.server.."Steam-ID found.")
-                read_data(id)
-                load.assignSavedData(id, saved_data)
-                Player[id].VARSLOADED = true
+            msg2(id,cloud.tags.server.."USGN-ID/Steam-ID NOT Found, assigning default user vars.")
+            if player(id,"ip") == "0.0.0.0" and cloud.settings.local_admin then
+                load.assignRankData(id, "admin")
             else
-                msg2(id,cloud.tags.server.."USGN-ID/Steam-ID NOT Found, assigning default user vars.")
-                if player(id,"ip") == "0.0.0.0" and cloud.settings.local_admin then
-                    load.assignRankData(id, "admin")
-                else
-                    load.assignRankData(id, "user")
-                end
-                Player[id].VARSLOADED = true
+                load.assignRankData(id, "user")
             end
         end
+        Player[id].VARSLOADED = true
     end
 end
 
 -- Login manually (with command)
 function load.loginUSGN(id, login, password)
     local fileUSGN = io.open(directory.."users/"..login..".txt", "r")
+    local saved_data
 
     if fileUSGN then
-        if saved_data.var_usgn_password == password and login ~= nil then
-            msg2(id,cloud.tags.server.."Assigning user #"..login.." vars!")
-            load.assignSavedData(id, saved_data)
-            fileUSGN:close()
-            fileUSGN = nil
-            Player[id].var_login = login
-        else
-            msg2(id,cloud.tags.server.."The provided U.S.G.N. ID or password is incorrect!")
-        end
+        saved_data = table.deserialize(fileUSGN:read("*a"))
+        fileUSGN:close()
     else
         msg2(id,cloud.tags.server.."No user found with ID: #"..login..", password: "..password)
+    end
+
+    if saved_data.var_usgn_password == password and login ~= nil then
+        msg2(id,cloud.tags.server.."Success! Assigning user USGN#"..login.." vars!")
+        msg2(id,cloud.tags.server.."You are now logged in as USGN#"..login)
+        load.assignSavedData(id, saved_data)
+        Player[id].var_login = login
+    else
+        msg2(id,cloud.tags.server.."The provided U.S.G.N. ID or password is incorrect!")
     end
 end
 
