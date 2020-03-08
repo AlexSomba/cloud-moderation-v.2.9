@@ -78,7 +78,7 @@ function logs.mutePlayer(id,name,usgn,steam,duration,toggle)
     end
 end
 
-local function generateReportItem(l_menu, line, i, line_index)
+local function generateLogItem(l_menu, line, i, line_index)
     local time, ip, steam, usgn, id, team, name, log = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%]: ([%w%p ]+)")
 
     local ban_menu = {
@@ -179,9 +179,7 @@ function logs.retrieve_logs()
     local l_menu = {
         title = "Logs",
         items = {},
-        fixedItems = {
-	        [7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}
-	    },
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}},
         big = true,
         logs = {},
 	}
@@ -193,7 +191,7 @@ function logs.retrieve_logs()
         local line_index = i
         l_menu.logs[line_index] = line
 
-        table.insert(l_menu.items, generateReportItem(l_menu, line, i, line_index))
+        table.insert(l_menu.items, generateLogItem(l_menu, line, i, line_index))
         i = i + 1
     end
     file:close()
