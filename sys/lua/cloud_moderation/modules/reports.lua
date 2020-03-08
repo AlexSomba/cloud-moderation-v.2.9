@@ -17,7 +17,7 @@ function reports.retrieve_reports()
         r_menu.reports[line_index] = line
         local time, ip, steam, usgn, id, team, name, nameTarget, steamTarget, usgnTarget, ipTarget, reason = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%] %>> (.+) %| (%d+) %| (%d+) %| ([%d%.]+) %: ([%w%p ]+)")
         local action_menu = {
-            title = nameTarget.." - "..usgnTarget.." - "..ipTarget,
+            title = nameTarget.." - "..ipTarget,
             items = {
                 {"Ban Name","",function(id) parse("banname " ..nameTarget) end},
                 {"Ban IP","",function(id) parse("banip " .. ipTarget) end},
@@ -35,6 +35,8 @@ function reports.retrieve_reports()
                     local fd = io.open(directory.."data/reports.txt", "w")
                     fd:write(content)
                     fd:close()
+
+                    unimenu.open(id, reports.retrieve_reports())
                 end
                 },
                 {"Erase all Reports","",
@@ -42,6 +44,8 @@ function reports.retrieve_reports()
                     local fd = io.open(directory.."data/reports.txt", "w")
                     fd:write()
                     fd:close()
+
+                    unimenu.open(id, reports.retrieve_reports())
                 end}
             },
             fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}

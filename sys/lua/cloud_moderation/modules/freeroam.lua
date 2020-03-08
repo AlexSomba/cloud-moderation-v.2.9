@@ -28,7 +28,6 @@ freeroam.settings = {
 local menu_tbl = {
     [1] = {
         title = "Premium Teleport",
-        modifiers = "s",
         items = {
             {"Shop", "", function(id) parse("setpos "..id.." ".. 22*32+16 .." ".. 17*32+16) end},
             {"Blue Portal", "", function(id) parse("setpos "..id.." ".. 52*32+16 .." ".. 56*32+16) end},
@@ -39,7 +38,6 @@ local menu_tbl = {
     },
     [2] = {
         title = "Premium Equip",
-        modifiers = "s",
         items = {
             {"Deagle", "", function(id) parse("equip "..id.." 3") end},
             {"Wrench", "", function(id) parse("equip "..id.." 74") end},
@@ -49,7 +47,6 @@ local menu_tbl = {
     },
     [3] = {
         title = "Spawn Item",
-        modifiers = "s",
         items = {
             {"Deagle", "", function(id) parse("spawnitem 3 42 3") end},
             {"Wrench", "", function(id) parse("spawnitem 74 42 3") end},
@@ -104,17 +101,17 @@ function movetile_module_freeroam(id, x, y)
             msg2(id,cloud.tags.server.."Register at discord.gg/xYyM3zQ and get your premium rank!")
         end
     elseif x == 37 and y == 7 then
-        unimenu(id,true,menu_tbl[1],1)
+        unimenu.open(id, menu_tbl[1])
     elseif x == 37 and y == 2 then
-        unimenu(id,true,menu_tbl[2],1)
+        unimenu.open(id, menu_tbl[2])
     elseif x == 42 and y == 3 then
-        unimenu(id,true,menu_tbl[3],1)
+        unimenu.open(id, menu_tbl[3])
     elseif x == 68 and y == 40 then
-        unimenu(id,true,menu_tbl[4],1)
+        unimenu.open(id, menu_tbl[4])
     elseif x == 68 and y == 69 then
-        unimenu(id,true,menu_tbl[1],1)
+        unimenu.open(id, menu_tbl[1])
     elseif x == 76 and y == 81 then
-        unimenu(id,true,menu_tbl[3],1)
+        unimenu.open(id, menu_tbl[3])
     end
 end
 

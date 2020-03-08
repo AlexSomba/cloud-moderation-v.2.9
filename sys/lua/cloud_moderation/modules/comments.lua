@@ -2,9 +2,11 @@ comments = {}
 
 function comments.retrieve_comments()
     local c_menu = {
-        comments = {},
         title = "Comments",
+        comments = {},
         items = {},
+        fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}},
+        big = true,
     }
 
     local file = io.open(directory.."data/comments.txt", "r")
@@ -15,14 +17,12 @@ function comments.retrieve_comments()
         c_menu.comments[line_index] = line
         local time, ip, steam, usgn, id, team, name, comment = string.match(line, "(%d+%-%d+%-%d+ %d+:%d+ [AP]M) %- %[IP: ([%d%.]+)%] %[STEAM: (%d+)%] %[USGN: (%d+)%] %[ID: (%d+)%] %[Team: (%d+)%] %[Name: (.+)%]: ([%w%p ]+)")
         local action_menu = {
-            title = name.." - "..usgn.." - "..ip,
-            modifiers = "s",
+            title = name.." - "..ip,
             items = {
                 {"Ban Name","",function(id) parse("banname " ..name) end},
                 {"Ban IP","",function(id) parse("banip " .. ip) end},
                 {"Ban U.S.G.N.","",function(id) parse("banusgn " ..usgn) end},
                 {"Ban STEAM","",function(id) parse("bansteam " ..steam) end},
-                {"","",function(id) end},
                 {"Delete Comment","",
                 function(id)
                     local tbl = {}
@@ -35,6 +35,8 @@ function comments.retrieve_comments()
                     local fd = io.open(directory.."data/comments.txt", "w")
                     fd:write(content)
                     fd:close()
+
+                    unimenu.open(id, comments.retrieve_comments())
                 end
                 },
                 {"Erase all Comments","",
@@ -42,10 +44,13 @@ function comments.retrieve_comments()
                     local fd = io.open(directory.."data/comments.txt", "w")
                     fd:write()
                     fd:close()
-                end}
+
+                    unimenu.open(id, comments.retrieve_comments())
+                end},
+                fixedItems = {[7] = {"<< Return", "", function(id) unimenu.historyBack(id) end}}
             },
         }
-        table.insert(c_menu.items, {name.." - "..usgn.." - "..ip, comment, function(id) unimenu(id, true, action_menu, 1) end})
+        table.insert(c_menu.items, {time.." - "..name, comment, function(id) unimenu.open(id, action_menu) end})
         i = i + 1
     end
     file:close()
