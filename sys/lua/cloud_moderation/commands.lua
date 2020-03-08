@@ -566,15 +566,6 @@ cloud.commands = {
 	},
 
 	-- No syntax for these commands, they are just one way
-    reloadlua = {
-		syntax = cloud.tags.syntax.."!reloadlua",
-		about = cloud.tags.about.."Reloads Lua scripts by Reloading the map (mapchange).",
-		func = function(id, pl, text, tbl)
-            msg(cloud.tags.server.."Updating server scripts (mapchange) in: 3 Seconds!@C")
-            timer(3000,"parse","map "..game("sv_map"))
-		end,
-	},
-
     restart = {
 		syntax = cloud.tags.syntax.."!restart",
 		about = cloud.tags.about.."Automatically restarts the server round.",
@@ -644,6 +635,24 @@ cloud.commands = {
                 Player[id].var_bigears_toggle = true
             end
             msg2(id,cloud.tags.server.."Bigears "..returnToggleValue(id, "var_bigears_toggle"))
+		end,
+	},
+
+    softreload = {
+        syntax = cloud.tags.syntax.."!softreload",
+        about = cloud.tags.about.."",
+        func = function(id, pl, text, tbl)
+            dofile(directory.."server.lua")
+            msg2(id,cloud.tags.server.."Server has been soft reloaded.")
+        end,
+    },
+
+    hardreload = {
+		syntax = cloud.tags.syntax.."!reloadlua",
+		about = cloud.tags.about.."Reloads Lua scripts by Reloading the map (mapchange).",
+		func = function(id, pl, text, tbl)
+            msg(cloud.tags.server.."Updating server scripts (mapchange) in: 3 Seconds!@C")
+            timer(3000,"parse","map "..game("sv_map"))
 		end,
 	}
 }
