@@ -52,6 +52,7 @@ cloud.settings = {
     modules = {
         -- Core modules that should be enabled --
         lastlogged = true,
+        emoticons = true,
         -- Access through F2 (Main Menu) --
         unban = true,
         comments = true,
