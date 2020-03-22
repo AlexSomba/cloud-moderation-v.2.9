@@ -62,7 +62,7 @@ cloud.settings = {
         -- Extended scripting modules --
         freeroam = false,
         mixmatch = false,
-        prison = true
+        prison = false
     },
 
     -- Cloud Buster Modules to load --
