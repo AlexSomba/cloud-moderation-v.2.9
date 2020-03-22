@@ -24,7 +24,7 @@ cloud.colors = {
 }
 
 cloud.settings = {
-    version = "Beta - Patch v3.0",
+    version = "Beta - Patch v3.1",
     credits = {
         "== Credits ==",
         "Alex, (U.S.G.N)#57648 - Moderation script.",
@@ -61,7 +61,8 @@ cloud.settings = {
 
         -- Extended scripting modules --
         freeroam = false,
-        mixmatch = false
+        mixmatch = false,
+        prison = true
     },
 
     -- Cloud Buster Modules to load --
@@ -124,17 +125,15 @@ cloud.settings = {
 
     -- Player Levels Configs --
 	users = {
-		blacklisted = {
+		["blacklisted"] = {
             level = -1,
-            name = "blacklisted",
             tag = "[Blacklisted]",
             commands = {},
             tag_color = colors("lavender")
         },
 
-		user = {
+		["user"] = {
             level = 0,
-            name = "user",
             tag = "[User]",
             commands = {
                 "pm","comment","report","help","credits","register","login"
@@ -142,9 +141,8 @@ cloud.settings = {
             tag_color = colors("lavender_blue")
         },
 
-		premium = {
+		["premium"] = {
             level = 1,
-            name = "premium",
             tag = "[Premium]",
             commands = {
                 "pm","comment","report","help","credits","register","login"
@@ -152,9 +150,8 @@ cloud.settings = {
             tag_color = colors("safety_orange")
         },
 
-		member = {
+		["member"] = {
             level = 2,
-            name = "member",
             tag = "[Member]",
             commands = {
                 "pm","comment","report","help","credits","register","login"
@@ -162,9 +159,8 @@ cloud.settings = {
             tag_color = colors("neon_blue")
         },
 
-		supporter = {
+		["supporter"] = {
             level = 3,
-            name = "supporter",
             tag = "[Supporter]",
             commands = {
                 "pm","comment","report","help","kick","info","credits","register",
@@ -173,9 +169,8 @@ cloud.settings = {
             tag_color = colors("magenta")
         },
 
-		moderator = {
+		["moderator"] = {
             level = 4,
-            name = "moderator",
             tag = "[Moderator]",
             commands = {
                 "pm","comment","report","help","kick","ban","info","tag","bring",
@@ -185,9 +180,8 @@ cloud.settings = {
             tag_color = colors("green")
         },
 
-		globalmod = {
+		["globalmod"] = {
             level = 5,
-            name = "globalmod",
             tag = "[GM]",
             commands = {
                 "pm","comment","report","help","kick","ban","info",
@@ -198,15 +192,15 @@ cloud.settings = {
             tag_color = colors("dark_cyan")
         },
 
-		admin = {
+		["admin"] = {
             level = 6,
-            name = "admin",
             tag = "[Admin]",
             commands = {
                 "pm","comment","report","help","kick","ban","make","info",
                 "tag","god","bring","goto","bigears","mute","unmute","slap","kill",
-                "strip","speed","equip","map","restart","rcon","reloadlua","teleport",
-                "buster","periodic","credits","lastlogged","register","login","grab"
+                "strip","speed","equip","map","restart","rcon","teleport",
+                "buster","periodic","credits","lastlogged","register","login","grab",
+                "softreload","hardreload","t"
             },
             tag_color = colors("scarlet")
         }

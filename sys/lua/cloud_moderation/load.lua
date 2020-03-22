@@ -20,7 +20,7 @@ end
 function load.assignRankData(id, rank)
     -- Core script vars
     Player[id].var_level = cloud.settings.users[rank].level
-    Player[id].var_level_name = cloud.settings.users[rank].name
+    Player[id].var_level_name = rank
     Player[id].var_tag_name = cloud.settings.users[rank].tag
     Player[id].var_tag_color = cloud.settings.users[rank].tag_color
     Player[id].var_tag_toggle = true -- You can set this to 0 after the function call in the data loading function

@@ -14,5 +14,11 @@ function mod_hit(id, source, weapon, hpdmg, apdmg, rawdmg, object)
             end
         end
     end
+
+	if cloud.settings.modules.prison == true then
+		if weapon == 78 then
+			return 1
+		end
+	end
 end
 addhook("hit","mod_hit")
